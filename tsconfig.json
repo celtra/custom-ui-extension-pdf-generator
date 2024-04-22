@@ -1,0 +1,38 @@
+{
+  "include": ["src/**/*", "src/**/*.vue", "tests/**/*"],
+  "compilerOptions": {
+    "composite": true,
+    "moduleResolution": "node",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "preserve",
+    "allowJs": true,
+
+
+    "target": "esnext",
+    "module": "esnext",
+
+    "esModuleInterop": true,
+    "sourceMap": true,
+
+    "baseUrl": ".",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+
+
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+  }
+}
