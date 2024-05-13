@@ -32,6 +32,7 @@ For development and testing Celtra sandbox account should be used to avoid parti
 3. Host the `index.html` file. As it's a simple html, you can do this in multiple ways - from creating own server to uploading it anywhere that allows file hosting and download. The html must be served with `text/html` mime type and must not have headers preventing it from being served inside an `iframe`. You will need the url where the html is served for next step.
 
 4. Add extension on account:
+```
 		curl --location 'https://hub.celtra.io/api/uiExtensions' \
 		--user '<ApiAppId>:<ApiAppKey>' \
 		--header 'Content-Type: application/json;charset=UTF-8' \
@@ -41,6 +42,7 @@ For development and testing Celtra sandbox account should be used to avoid parti
 			"isEnabled": true,
 			"indexHtmlUrl": "<your hosting url>"
 		}'
+```
 	To see the extension in Celtra platform, open Design file in Scaling Studio and go to Overview tab, click on Export button and you should see it as an option in Distribute list.
 	Note: if your extension contains errors or URL is not accessible it might not appear in the list.
 
