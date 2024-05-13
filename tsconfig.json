@@ -1,5 +1,4 @@
 {
-  "include": ["src/**/*", "src/**/*.vue", "tests/**/*"],
   "compilerOptions": {
     "composite": true,
     "moduleResolution": "node",
@@ -9,7 +8,6 @@
     "noEmit": true,
     "jsx": "preserve",
     "allowJs": true,
-
 
     "target": "esnext",
     "module": "esnext",
