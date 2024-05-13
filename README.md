@@ -33,7 +33,7 @@ For development and testing Celtra sandbox account should be used to avoid parti
 
 4. Add extension on account:
 
-		curl --location 'https://hub.celtra.io/api/uiExtensions' \
+		curl -X POST --location 'https://hub.celtra.io/api/uiExtensions' \
 		--user '<ApiAppId>:<ApiAppKey>' \
 		--header 'Content-Type: application/json;charset=UTF-8' \
 		--data '{
@@ -46,7 +46,31 @@ For development and testing Celtra sandbox account should be used to avoid parti
 
 	Note: if your extension contains errors or URL is not accessible it might not appear in the list.
 
-SANDI TODO: let's add a example as well how to update extension (for name change, URL or set isEnabled to false) and for deleting extensions.
+
+### Celtra uiExtensions API endpoint
+
+	You can request a list of extensions with the following get request:
+
+		curl --location 'https://hub.celtra.io/api/uiExtensions?accountId={accountId}' \
+		--user '<ApiAppId>:<ApiAppKey>'
+
+	After an extension is registered you can edit `name`, `isEnabled` and `indexHtmlUrl` properties with a PUT request:
+
+		curl -X PUT --location 'https://hub.celtra.io/api/uiExtensions/:extensionEntityId' \
+		--user '<ApiAppId>:<ApiAppKey>' \
+		--header 'Content-Type: application/json;charset=UTF-8' \
+		--data '{
+			"name": "New Example Extension",
+			"isEnabled": false,
+			"indexHtmlUrl": "<your hosting url>"
+		}'
+
+	You can delete a registered extension with a DELETE request:
+
+		curl -X DELETE --location 'https://hub.celtra.io/api/uiExtensions/:extensionEntityId' \
+		--user '<ApiAppId>:<ApiAppKey>' \
+		--header 'Content-Type: application/json;charset=UTF-8'
+
 
 ### Development environment
 
