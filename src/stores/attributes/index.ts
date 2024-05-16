@@ -1,0 +1,1 @@
+export { useAttributesStore } from './store'

@@ -2,18 +2,23 @@
 
 module.exports = {
     'root': true,
-    'plugins': ['@typescript-eslint', 'ts-standard'],
+    'plugins': [
+        '@typescript-eslint',
+    ],
     'env': {
         'browser': true,
-        'vue/setup-compiler-macros': true,
     },
     'extends': [
         'eslint:recommended',
-        'standard-with-typescript', // https://github.com/standard/standard-with-typescript
-        'plugin:@typescript-eslint/stylistic-type-checked'
+        'plugin:vue/vue3-recommended',
+        'plugin:@typescript-eslint/stylistic-type-checked',
+        '@vue/eslint-config-typescript',
     ],
+    "parser": "vue-eslint-parser",
     'parserOptions': {
         'parser': '@typescript-eslint/parser',
         'ecmaVersion': 2020,
+        'project': './tsconfig.json',
     },
+    "ignorePatterns": '.eslintrc.js',
 }
