@@ -76,7 +76,7 @@ You can request a list of extensions with the following get request:
 	curl --location 'https://hub.celtra.io/api/uiExtensions?accountId={accountId}' \
 	--user '<ApiAppId>:<ApiAppKey>'
 
-After an extension is registered you can edit `name`, `isEnabled` and `indexHtmlUrl` properties with a PUT request:
+After an extension is registered you can edit `name`, `isEnabled`, `indexHtmlUrl` and `html` properties with a PUT request. The `indexHtmlUrl` and `html` cannot be set at the same time:
 
 	curl -X PUT --location 'https://hub.celtra.io/api/uiExtensions/:extensionEntityId' \
 	--user '<ApiAppId>:<ApiAppKey>' \
@@ -86,6 +86,24 @@ After an extension is registered you can edit `name`, `isEnabled` and `indexHtml
 		"isEnabled": false,
 		"indexHtmlUrl": "<your hosting url>"
 	}'
+
+To edit the `html` content you need to base64 encode it:
+
+	# Base64 encode index.html.
+	html_content=$(cat /path/to/file | base64 -w 0)
+
+	# Construct JSON payload with Base64-encoded HTML.
+	json_payload='{
+		"html": "'"$html_content"'"
+	}'
+
+	# Send POST request with JSON payload using curl.
+	curl -X PUT --location 'https://hub.celtra.io/api/uiExtensions/:extensionEntityId' \
+	--user '<ApiAppId>:<ApiAppKey>' \
+	-H 'Content-Type: application/json;charset=UTF-8' \
+	-d @- <<EOF
+	$json_payload
+	EOF
 
 You can delete a registered extension with a DELETE request:
 
