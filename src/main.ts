@@ -1,14 +1,17 @@
-import { createApp } from 'vue'
+import { createApp, h } from 'vue'
 import App from './App.vue'
 import 'vuetify/styles'
-import { createVuetify } from 'vuetify'
+import { IconProps, createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import celtra, { OutputAttributes, OutputAttributesRegistrationOptions } from '@celtra-public/eagle-extensions-sdk'
 import { EXAMPLE_DISTRIBUTION_WORKFLOW, OUTPUT_ATTRIBUTES_REGISTRATION_OPTIONS } from './constants'
 import { createPinia } from 'pinia'
-import '@mdi/font/css/materialdesignicons.css'
 import { useAttributesStore } from './stores/attributes'
+import CarouselNextIcon from './icons/CarouselNextIcon.vue'
+import CarouselPrevIcon from './icons/CarouselPrevIcon.vue'
+import CarretDown from './icons/CarretDown.vue'
+import CloseCircle from './icons/CloseCircle.vue'
 
 // Headless extension that does it's work when design file is opened, like:
 // - registering formats
@@ -24,11 +27,35 @@ if (celtra.launchOptions.main) {
   })
 }
 
+
+// Material design icons for veutify add ~6MB to exported html, we use custom icons instead
+// To use material design icons, npm install @mdi/font package and import '@mdi/font/css/materialdesignicons.css' here
+const icons = {
+  carouselNext: CarouselNextIcon,
+  carouselPrev: CarouselPrevIcon,
+  carretDown: CarretDown,
+  closeCircle: CloseCircle,
+} as Record<string, any>
+
 // When launchOptions distribution is true, the extension appears as a window opened in export dialog.
 if (celtra.launchOptions.distribution) {
   const vuetify = createVuetify({
     components,
-    directives
+    directives,
+    icons: {
+      aliases: {
+        dropdown: 'custom:carretDown',
+        clear: 'custom:closeCircle',
+        prev: 'custom:carouselPrev',
+        next: 'custom:carouselNext',
+      },
+      defaultSet: 'custom',
+      sets: {
+        custom: {
+          component: (props: IconProps) => h(icons[props.icon as string]),
+        }
+      }
+    },
   })
 
   const app = createApp(App)
