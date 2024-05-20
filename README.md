@@ -29,9 +29,7 @@ For development and testing Celtra sandbox account should be used to avoid parti
 
 2. Run `npm run build` to create `dist/index.html`
 
-3. Host the `index.html` file. As it's a simple html, you can do this in multiple ways - from creating own server to uploading it anywhere that allows file hosting and download. The html must be served with `text/html` mime type and must not have headers preventing it from being served inside an `iframe`. You will need the url where the html is served for next step.
-
-4. Add extension on account:
+3. (Self hosted `index.html`) Host the `index.html` file. As it's a simple html, you can do this in multiple ways - from creating own server to uploading it anywhere that allows file hosting and download. The html must be served with `text/html` mime type and must not have headers preventing it from being served inside an `iframe`. You will need the url where the html is served for next step. Add extension to account:
 
 		curl -X POST --location 'https://hub.celtra.io/api/uiExtensions' \
 		--user '<ApiAppId>:<ApiAppKey>' \
@@ -42,9 +40,33 @@ For development and testing Celtra sandbox account should be used to avoid parti
 			"isEnabled": true,
 			"indexHtmlUrl": "<your hosting url>"
 		}'
-	To see the extension in Celtra platform, open Design file in Scaling Studio and go to Overview tab, click on Export button and you should see it as an option in Distribute list.
 
-	Note: if your extension contains errors or URL is not accessible it might not appear in the list.
+3. (Celtra hosted `index.html`) You can also add the extension by providing the `base64` of your `index.html` file instead of `indexHtmlUrl`. In this case Celtra hosts the file for you. To add extension to account with encoded `index.html`:
+
+		# Base64 encode index.html.
+		html_content=$(cat /path/to/file | base64 -w 0)
+
+		# Construct JSON payload with Base64-encoded HTML.
+		json_payload='{
+			"accountId": "<your account id>",
+			"name": "Example Extension",
+			"isEnabled": true,
+			"html": "'"$html_content"'"
+		}'
+
+		# Send POST request with JSON payload using curl.
+		curl -X POST \
+		--location 'https://hub.celtra.io/api/uiExtensions' \
+		--user '<ApiAppId>:<ApiAppKey>' \
+		-H 'Content-Type: application/json;charset=UTF-8' \
+		-d @- <<EOF
+		$json_payload
+		EOF
+
+
+To see the extension in Celtra platform, open Design file in Scaling Studio and go to Overview tab, click on Export button and you should see it as an option in Distribute list.
+
+Note: if your extension contains errors or URL is not accessible it might not appear in the list.
 
 
 ### Celtra uiExtensions API endpoint
