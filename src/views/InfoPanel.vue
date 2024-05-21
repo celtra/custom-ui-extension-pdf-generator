@@ -38,6 +38,7 @@
         >
           <div class="asset-preview-cell">
             <v-select
+              class="asset-preview-select"
               :label="name"
               density="compact"
               :model-value="attributeSelectionVModel(output.id, name)"
@@ -153,5 +154,9 @@ function outputAttributesPossibleValues (name: string): string[] {
 .asset-preview-cell {
   height: 320px;
   padding: 16px 0px;
+}
+
+.asset-preview-select {
+  width: 175px;
 }
 </style>
