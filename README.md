@@ -31,7 +31,9 @@ For development and testing Celtra sandbox account should be used to avoid parti
 
 3. You have two options to add extensions to the Celtra platform:
 
-	- (Self hosted `index.html`) Host the `index.html` file. As it's a simple html, you can do this in multiple ways - from creating own server to uploading it anywhere that allows file hosting and download. The html must be served with `text/html` mime type and must not have headers preventing it from being served inside an `iframe`. You will need the url where the html is served for next step. Add extension to account:
+	- **Self-hosted `index.html`:**
+
+		Host the `index.html` file on your own server or hosting service. The html must be served with `text/html` mime type and must not have headers preventing it from being served inside an `iframe`. You will need to pass the url where the `index.html` is hosted in the `indexHtmlUrl` parameter. Example for adding an extension with a self-hosted `index.html`:
 
 			curl -X POST --location 'https://hub.celtra.io/api/uiExtensions' \
 			--user '<ApiAppId>:<ApiAppKey>' \
@@ -43,7 +45,9 @@ For development and testing Celtra sandbox account should be used to avoid parti
 				"indexHtmlUrl": "<your hosting url>"
 			}'
 
-	- (Celtra hosted `index.html`) You can also add the extension by providing the `base64` of your `index.html` file instead of `indexHtmlUrl`. In this case Celtra hosts the file for you. To add extension to account with encoded `index.html`:
+	- **Celtra-hosted `index.html`:**
+
+		You can also use Celtra to host your extension's `index.html` file. Encode the `index.html` file using `base64` and pass it in the `html` parameter. Example for adding an extension with a Celtra-hosted `index.html`:
 
 			# Base64 encode index.html.
 			html_content=$(cat /path/to/file | base64 -w 0)
@@ -66,9 +70,10 @@ For development and testing Celtra sandbox account should be used to avoid parti
 			EOF
 
 
-To see the extension in Celtra platform, open Design file in Scaling Studio and go to Overview tab, click on Export button and you should see it as an option in Distribute list.
+To view the extension in Celtra CA, open a Design File and go to Overview tab, click on Export button and you should see your extension as an option in Distribute list.
 
-Note: if your extension contains errors or URL is not accessible it might not appear in the list.
+> [!NOTE]
+> If your extension contains errors or URL is not accessible it might not appear in the list.
 
 
 ### Celtra uiExtensions API endpoint
@@ -89,7 +94,7 @@ After an extension is registered you can edit `name`, `isEnabled`, `indexHtmlUrl
 		"indexHtmlUrl": "<your hosting url>"
 	}'
 
-To edit the `html` content you need to base64 encode it:
+To edit extensions with Celtra-hosted `index.html`, you need to encode it using `base64` first:
 
 	# Base64 encode index.html.
 	html_content=$(cat /path/to/file | base64 -w 0)
@@ -99,7 +104,7 @@ To edit the `html` content you need to base64 encode it:
 		"html": "'"$html_content"'"
 	}'
 
-	# Send POST request with JSON payload using curl.
+	# Send PUT request with JSON payload using curl.
 	curl -X PUT --location 'https://hub.celtra.io/api/uiExtensions/:extensionEntityId' \
 	--user '<ApiAppId>:<ApiAppKey>' \
 	-H 'Content-Type: application/json;charset=UTF-8' \
