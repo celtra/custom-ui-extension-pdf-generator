@@ -71,7 +71,7 @@ To work with this repository, you will need [node and npm installed](https://doc
 				-H 'Content-Type: application/json;charset=UTF-8' \
 				-d @- <<EOF
 					$json_payload
-				EOF
+			EOF
 
 
 To view the extension in Celtra CA, open a Design File and go to Overview tab, click on Export button and you should see your extension as an option in Distribute list.
@@ -121,7 +121,7 @@ Celtra-hosed `index.html`:
 		-H 'Content-Type: application/json;charset=UTF-8' \
 		-d @- <<EOF
 			$json_payload
-		EOF
+	EOF
 
 #### List all extensions in account
 
@@ -169,7 +169,7 @@ Celtra-hosed `index.html`:
 		-H 'Content-Type: application/json;charset=UTF-8' \
 		-d @- <<EOF
 			$json_payload
-		EOF
+	EOF
 
 #### Delete extension
 
