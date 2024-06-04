@@ -73,6 +73,7 @@ To work with this repository, you will need [node and npm installed](https://doc
 					$json_payload
 			EOF
 
+If successful, you will get an `extensionEntityId` back.
 
 To view the extension in Celtra CA, open a Design File and go to Overview tab, click on Export button and you should see your extension as an option in Distribute list.
 
@@ -106,6 +107,8 @@ Celtra-hosed `index.html`:
 
 	# Base64 encode index.html.
 	html_content=$(cat /path/to/file | base64 -w 0)
+	# Or in some Mac shells
+	# html_content=$(cat /path/to/file | base64 -b 0)
 
 	# Construct JSON payload with Base64-encoded HTML.
 	json_payload='{
@@ -114,7 +117,7 @@ Celtra-hosed `index.html`:
 		"isEnabled": true,
 		"html": "'"$html_content"'"
 	}'
-	
+
 	curl -X POST \
 		--location 'https://hub.celtra.io/api/uiExtensions' \
 		--user '<ApiAppId>:<ApiAppKey>' \
@@ -122,6 +125,8 @@ Celtra-hosed `index.html`:
 		-d @- <<EOF
 			$json_payload
 	EOF
+
+If successful, you will get an `extensionEntityId` back.
 
 #### List all extensions in account
 
@@ -141,7 +146,7 @@ You can edit `name`, `isEnabled`, `indexHtmlUrl` and `html` properties of existi
 Self-hosed `index.html`:
 
 	curl -X PUT \
-	 	--location 'https://hub.celtra.io/api/uiExtensions/:extensionEntityId' \
+	 	--location 'https://hub.celtra.io/api/uiExtensions/<extensionEntityId>' \
 		--user '<ApiAppId>:<ApiAppKey>' \
 		--header 'Content-Type: application/json;charset=UTF-8' \
 		--data '{
@@ -154,6 +159,8 @@ Celtra-hosed `index.html`:
 
 	# Base64 encode index.html.
 	html_content=$(cat /path/to/file | base64 -w 0)
+	# Or in some Mac shells
+	# html_content=$(cat /path/to/file | base64 -b 0)
 
 	# Construct JSON payload with Base64-encoded HTML.
 	json_payload='{
@@ -162,7 +169,7 @@ Celtra-hosed `index.html`:
 		"isEnabled": true,
 		"html": "'"$html_content"'"
 	}'
-	
+
 	curl -X PUT \
 		--location 'https://hub.celtra.io/api/uiExtensions' \
 		--user '<ApiAppId>:<ApiAppKey>' \
@@ -176,7 +183,7 @@ Celtra-hosed `index.html`:
 You can delete a registered extension using the `DELETE` method:
 
 	curl -X DELETE
- 		--location 'https://hub.celtra.io/api/uiExtensions/:extensionEntityId' \
+ 		--location 'https://hub.celtra.io/api/uiExtensions/<extensionEntityId>' \
 		--user '<ApiAppId>:<ApiAppKey>' \
 		--header 'Content-Type: application/json;charset=UTF-8'
 
@@ -239,5 +246,3 @@ Removes the `callback` for event of `type`. `callback` must be the same (`===` c
 
 	readonly launchOptions: LaunchOptions
 Launch options contain the setting the extension is ran in and information extensions in that setting usually use. The extensions are first ran in headless mode when the design file is opened and the extension receives `launchOptions.main`. When used in the export dialog (see `registerDistributionWorkflow`), the extension receives `launchOptions.distribution` .
-
-
