@@ -114,7 +114,7 @@ Celtra-hosed `index.html`:
 		"isEnabled": true,
 		"html": "'"$html_content"'"
 	}'
-
+	
 	curl -X POST \
 		--location 'https://hub.celtra.io/api/uiExtensions' \
 		--user '<ApiAppId>:<ApiAppKey>' \
@@ -162,7 +162,7 @@ Celtra-hosed `index.html`:
 		"isEnabled": true,
 		"html": "'"$html_content"'"
 	}'
-
+	
 	curl -X PUT \
 		--location 'https://hub.celtra.io/api/uiExtensions' \
 		--user '<ApiAppId>:<ApiAppKey>' \
@@ -239,3 +239,5 @@ Removes the `callback` for event of `type`. `callback` must be the same (`===` c
 
 	readonly launchOptions: LaunchOptions
 Launch options contain the setting the extension is ran in and information extensions in that setting usually use. The extensions are first ran in headless mode when the design file is opened and the extension receives `launchOptions.main`. When used in the export dialog (see `registerDistributionWorkflow`), the extension receives `launchOptions.distribution` .
+
+
