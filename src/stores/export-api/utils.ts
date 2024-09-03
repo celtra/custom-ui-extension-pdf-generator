@@ -1,4 +1,4 @@
-import type { Request as ExportApiRequest, AdServer } from '@celtra-public/eagle-extensions-sdk'
+import type { Request as ExportApiRequest, AdServer } from '@celtra/eagle-extensions-sdk'
 
 /**
  * Constructs payload that can be used to call the export api

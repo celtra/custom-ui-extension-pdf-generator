@@ -190,7 +190,7 @@ You can delete a registered extension using the `DELETE` method:
 
 ## Celtra extensions SDK
 
-Celtra provides a public npm package `@celtra-public/eagle-extensions-sdk` published to GitHub packages. It provides predefined functions and data types (e.g. Export API output types and Custom Format Schema Definition) the extension can use to communicate with the Celtra CA platform.
+Celtra provides a public npm package `@celtra/eagle-extensions-sdk` published to GitHub packages. It provides predefined functions and data types (e.g. Export API output types and Custom Format Schema Definition) the extension can use to communicate with the Celtra CA platform.
 
 
 ### Functions
