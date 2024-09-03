@@ -8,7 +8,7 @@ import celtra, {
   type ImageAsset,
   type VideoAsset,
   type HTMLAsset,
-} from '@celtra-public/eagle-extensions-sdk'
+} from '@celtra/eagle-extensions-sdk'
 
 export const useExportApiStore = defineStore('export-api', {
   state: (): State => ({

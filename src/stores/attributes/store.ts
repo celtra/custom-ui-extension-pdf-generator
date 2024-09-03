@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import type { State } from './types'
-import celtra, { type OutputAttributes, type OutputAttributesRegistrationOptions } from '@celtra-public/eagle-extensions-sdk'
+import celtra, { type OutputAttributes, type OutputAttributesRegistrationOptions } from '@celtra/eagle-extensions-sdk'
 
 export const useAttributesStore = defineStore('AttributesStore', {
     state: (): State => ({

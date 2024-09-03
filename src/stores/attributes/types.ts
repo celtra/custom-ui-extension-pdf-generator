@@ -1,4 +1,4 @@
-import type { OutputAttributesRegistrationOptions, OutputAttributes } from '@celtra-public/eagle-extensions-sdk'
+import type { OutputAttributesRegistrationOptions, OutputAttributes } from '@celtra/eagle-extensions-sdk'
 
 export interface State {
     outputAttributesRegistrationOptions: OutputAttributesRegistrationOptions,

@@ -1,4 +1,4 @@
-import type { Output } from '@celtra-public/eagle-extensions-sdk'
+import type { Output } from '@celtra/eagle-extensions-sdk'
 
 export interface State {
   inProgress: boolean
