@@ -14,7 +14,6 @@ export const useExportApiStore = defineStore('export-api', {
   state: (): State => ({
     inProgress: false,
     designFileContentBlobHash: null,
-    pendingOutputsCount: 0,
     outputs: [],
     exportFailedMessage: null
   }),
@@ -43,13 +42,12 @@ export const useExportApiStore = defineStore('export-api', {
         // Design file might be updated during export, we need to lock to the first content blob hash to guarantee that the export completes for the same version.
         this.designFileContentBlobHash = outputs[0].designFile.contentBlobHash
 
-        this.pendingOutputsCount = outputs.filter((output: Output) => output.status === 'pending').length
+        this.outputs = outputs
 
         if (this.pendingOutputsCount > 0) {
           return await new Promise((resolve) => setTimeout(() => { resolve(this.waitForFinishedExport(designFileId, outputIds, adServer, caller, timeoutInterval)) }, timeoutInterval))
         } else {
           this.inProgress = false
-          this.outputs = outputs
         }
       } catch (error: any) {
         this.inProgress = false
@@ -65,6 +63,9 @@ export const useExportApiStore = defineStore('export-api', {
   getters: {
     allOutputsCount (): number {
       return this.outputs.length
+    },
+    pendingOutputsCount (): number {
+      return this.outputs.filter((output: Output) => output.status === 'pending').length
     },
     progressMessage (): string {
       if (this.allOutputsCount === 0) {

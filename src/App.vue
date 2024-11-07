@@ -18,7 +18,7 @@ import { computed } from 'vue'
 import { useExportApiStore } from './stores/export-api'
 
 const exportApiStore = useExportApiStore()
-exportApiStore.export('custom-extension-template')
+exportApiStore.export('custom-extension-template', 'generic')
 
 const showLoadingPanel = computed(() => exportApiStore.inProgress)
 const exportFailedMessage = computed(() => exportApiStore.exportFailedMessage)
