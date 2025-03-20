@@ -1,11 +1,12 @@
 import { createApp, h } from 'vue'
-import App from './App.vue'
+import DistributionApp from './DistributionApp.vue'
+import EditorApp from './EditorApp.vue'
 import 'vuetify/styles'
 import { IconProps, createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import celtra, { OutputAttributes, OutputAttributesRegistrationOptions } from '@celtra/eagle-extensions-sdk'
-import { EXAMPLE_DISTRIBUTION_WORKFLOW, OUTPUT_ATTRIBUTES_REGISTRATION_OPTIONS } from './constants'
+import { EXAMPLE_DISTRIBUTION_WORKFLOW, EXAMPLE_EDITOR_WORKFLOW, OUTPUT_ATTRIBUTES_REGISTRATION_OPTIONS } from './constants'
 import { createPinia } from 'pinia'
 import { useAttributesStore } from './stores/attributes'
 import CarouselNextIcon from './icons/CarouselNextIcon.vue'
@@ -18,6 +19,7 @@ import CloseCircle from './icons/CloseCircle.vue'
 // - registering distribution workflows (registration needed to be used in export)
 if (celtra.launchOptions.main) {
   await celtra.registerDistributionWorkflow('example.distribution.workflow', EXAMPLE_DISTRIBUTION_WORKFLOW)
+  await celtra.registerEditorWorkflow('example.editor.workflow', EXAMPLE_EDITOR_WORKFLOW)
 
   // First time setting the attributes from persistent storage.
   await headlessAttributesUpdate()
@@ -58,7 +60,7 @@ if (celtra.launchOptions.distribution) {
     },
   })
 
-  const app = createApp(App)
+  const app = createApp(DistributionApp)
     .use(createPinia())
     .use(vuetify)
 
@@ -67,6 +69,19 @@ if (celtra.launchOptions.distribution) {
   await attributesStore.getExtensionStorage()
   // Register the extension attributes on the first time the extension is opened.
   await attributesStore.addRegisteredAttributes(OUTPUT_ATTRIBUTES_REGISTRATION_OPTIONS)
+
+  app.mount('#app')
+}
+
+if (celtra.launchOptions.editor) {
+  const vuetify = createVuetify({
+    components,
+    directives,
+  })
+
+  const app = createApp(EditorApp)
+    .use(createPinia())
+    .use(vuetify)
 
   app.mount('#app')
 }
