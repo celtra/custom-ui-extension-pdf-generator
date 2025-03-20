@@ -1,14 +1,15 @@
 <template>
-    <div
-        class="draggable-file"
-        draggable="true"
-        @dragstart.prevent.stop="onDragStart"
+  <div
+    class="draggable-file"
+    draggable="true"
+    @dragstart.prevent.stop="onDragStart"
+  >
+    <img
+      draggable="false"
+      class="draggable-file-image"
+      :src="dragAndDropPayload.thumbUrl"
     >
-        <img
-            draggable="false"
-            class="draggable-file-image"
-            :src="dragAndDropPayload.thumbUrl" />
-    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
