@@ -50,16 +50,11 @@ export const useExportApiStore = defineStore('export-api', {
           this.inProgress = false
         }
       } catch (error) {
-        if(error instanceof Error) {
-          this.inProgress = false
-          const message = error.message
-          if (typeof message === 'string') {
-            this.exportFailedMessage = message
-          } else {
-            this.exportFailedMessage = 'Something went wrong when exporting creatives.'
-          }
+        this.inProgress = false
+        if(error instanceof Error && typeof error.message === 'string') {
+          this.exportFailedMessage = error.message
         } else {
-          throw error
+          this.exportFailedMessage = 'Something went wrong when exporting creatives.'
         }
       }
     },
