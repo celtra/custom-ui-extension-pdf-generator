@@ -35,7 +35,7 @@ const icons = {
   carouselPrev: CarouselPrevIcon,
   carretDown: CarretDown,
   closeCircle: CloseCircle,
-} as Record<string, any>
+} as const
 
 // When launchOptions distribution is true, the extension appears as a window opened in export dialog.
 if (celtra.launchOptions.distribution) {
@@ -52,7 +52,7 @@ if (celtra.launchOptions.distribution) {
       defaultSet: 'custom',
       sets: {
         custom: {
-          component: (props: IconProps) => h(icons[props.icon as string]),
+          component: (props: IconProps) => h(icons[props.icon as keyof typeof icons], props),
         }
       }
     },

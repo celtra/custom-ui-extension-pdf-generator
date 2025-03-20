@@ -4,8 +4,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --ignore-path .gitignore",
-    "lint-fix": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --ignore-pattern .gitignore --ignore-pattern eslint.config.js",
+    "lint-fix": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-pattern .gitignore --ignore-pattern eslint.config.js"
   },
   "devDependencies": {
     "@babel/types": "^7.26.10",
