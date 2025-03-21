@@ -211,6 +211,10 @@ Register a new custom format using a schema. See `FormatRegistrationOptions` typ
 	registerDistributionWorkflow(distributionWorkflowRegistrationId: string, distributionWorkflowRegistrationOptions: DistributionWorkflowRegistrationOptions): Promise<void>
 Register a distribution workflow. This allows the extension to be visible in export dialog and open inside an iframe. `DistributionWorkflowRegistrationOptions` can contain formats registered in other extensions in `supportedFormats`.
 
+#### registerEditorWorkflow
+	registerEditorWorkflow(editorWorkflowRegistrationId: string, editorWorkflowRegistrationOptions: EditorWorkflowRegistrationOptions): Promise<void>
+Register an editor workflow. This allows the extension to be visible in design and content tabs inside an iframe.
+
 #### registerOutputAttributes
 	registerOutputAttributes(outputAttributesRegistrationOptions: OutputAttributesRegistrationOptions): Promise<void>
 Register output attributes with possible values on platform. Output attributes can be used to filter outputs.
@@ -231,6 +235,10 @@ Fetch the data stored by `setExtensionStorage`.
 	getOutputContentHashes(): Promise<OutputContentHashes[]>
 Get a list of output id's with a hash representing the content of the output.
 
+#### setDragAndDrop
+	setDragAndDrop(event: DragEvent, payload: DragAndDropPayload[]): Promise<void>
+This action is expected to be used on `dragstart` event with no propagation. It will initiate dragging the payload into the design file editor and will create a drop when `mouseup` event is received.
+
 #### on
 	on(type: EventType, callback: VoidFunction): void
 Register a `callback` function that is called when event of `type` occurs. See  `EventType` for possible options. Multiple callbacks can be registered.
@@ -245,4 +253,4 @@ Removes the `callback` for event of `type`. `callback` must be the same (`===` c
 #### launchOptions
 
 	readonly launchOptions: LaunchOptions
-Launch options contain the setting the extension is ran in and information extensions in that setting usually use. The extensions are first ran in headless mode when the design file is opened and the extension receives `launchOptions.main`. When used in the export dialog (see `registerDistributionWorkflow`), the extension receives `launchOptions.distribution` .
+Launch options contain the setting the extension is ran in and information extensions in that setting usually use. The extensions are first ran in headless mode when the design file is opened and the extension receives `launchOptions.main`. When used in the export dialog (see `registerDistributionWorkflow`), the extension receives `launchOptions.distribution` . When used in the editor (see `registerEditorWorkflow`), the extension receives `launchOptions.editor` .
