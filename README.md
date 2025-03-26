@@ -52,9 +52,9 @@ To work with this repository, you will need [node and npm installed](https://doc
 		You can also use Celtra to host your extension's `index.html` file. Encode the `index.html` file using `base64` and pass it in the `html` parameter. Example for adding an extension with a Celtra-hosted `index.html`:
 
 			# Base64 encode index.html.
-			html_content=$(cat /path/to/file | base64 -w 0)
+			html_content=$(cat dist/index.html | base64 -w 0)
 			# Or in some Mac shells
-			# html_content=$(cat /path/to/file | base64 -b 0)
+			# html_content=$(cat dist/index.html | base64 -b 0)
 
 			# Construct JSON payload with Base64-encoded HTML.
 			json_payload='{
