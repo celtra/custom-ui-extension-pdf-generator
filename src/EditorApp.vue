@@ -12,14 +12,14 @@
 import DraggableFile from './editor/DraggableFile.vue'
 
 const example1 = {
-  thumbUrl: 'https://cache-ssl.celtra.io/api/blobs/b6c7e1ee72ec2f0c9b74769ca63e4d179db2bad0c0ef195158bfafbc31069722/example1.png',
-  url: 'https://cache-ssl.celtra.io/api/blobs/b6c7e1ee72ec2f0c9b74769ca63e4d179db2bad0c0ef195158bfafbc31069722/example1.png',
+  thumbUrl: 'https://files-cdn.celtra.com/extensions-examples/example1.png',
+  url: 'https://files-cdn.celtra.com/extensions-examples/example1.png',
   name: 'Example1.png',
 }
 
 const example2 = {
-  thumbUrl: 'https://cache-ssl.celtra.io/api/blobs/08462b4801c778ebd489114f969d168bfdfd35ab638dd63556990df7c49e584a/example2.svg',
-  url: 'https://cache-ssl.celtra.io/api/blobs/08462b4801c778ebd489114f969d168bfdfd35ab638dd63556990df7c49e584a/example2.svg',
+  thumbUrl: 'https://files-cdn.celtra.com/extensions-examples/example2.svg',
+  url: 'https://files-cdn.celtra.com/extensions-examples/example2.svg',
   name: 'Example2.svg',
 }
 </script>
