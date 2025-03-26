@@ -13,7 +13,7 @@ As long as a single url can be provided, on which the extension is hosted, any t
 ### Before you begin
 To work with this repository, you will need [node and npm installed](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
 
-[Fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo) this repository to change it and make it your own.
+[Fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo) this repository to change it and make it your own. Once you clone it, run `npm ci` for first package installation.
 
 [Create a Celtra API App](https://support.celtra.io/account/users/set-up-an-api-application) to use basic auth.
 
