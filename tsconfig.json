@@ -1,36 +1,13 @@
 {
   "compilerOptions": {
-    "composite": true,
-    "moduleResolution": "node",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "preserve",
-    "allowJs": true,
-
     "target": "esnext",
     "module": "esnext",
-
-    "esModuleInterop": true,
-    "sourceMap": true,
-
-    "baseUrl": ".",
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-
-
-    /* Linting */
+    "moduleResolution": "node",
     "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-
-
-    "paths": {
-      "@/*": ["./src/*"]
-    },
-
-    "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true,
-  }
+    "jsx": "preserve",
+    "esModuleInterop": true,
+    "useDefineForClassFields": true,
+    "lib": ["esnext", "dom"]
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
 }
