@@ -1,6 +1,7 @@
 // usePdfGeneratorStore.ts
 import { defineStore } from 'pinia';
-import { getExtensionStorage, setExtensionStorage, launchOptions } from '@celtra/eagle-extensions-sdk';
+import * as sdk from '@celtra/eagle-extensions-sdk';
+const { getExtensionStorage, setExtensionStorage, launchOptions } = sdk;
 
 export const usePdfGeneratorStore = defineStore('pdfGenerator', {
   state: () => ({

@@ -29,8 +29,8 @@
 
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue';
-import { usePdfGeneratorStore } from '@/stores/usePdfGeneratorStore';
-import { createPDF } from '@/utils/pdfUtils';
+import { usePdfGeneratorStore } from '../stores/usePdfGeneratorStore';
+import { createPDF } from '../utils/pdfUtils';
 
 const store = usePdfGeneratorStore();
 const isGenerating = ref(false);
