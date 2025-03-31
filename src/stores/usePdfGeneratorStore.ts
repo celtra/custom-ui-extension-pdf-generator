@@ -1,7 +1,6 @@
 // usePdfGeneratorStore.ts
 import { defineStore } from 'pinia';
-import * as sdk from '@celtra/eagle-extensions-sdk';
-const { getExtensionStorage, setExtensionStorage, launchOptions } = sdk;
+import celtra from '@celtra/eagle-extensions-sdk';
 
 export const usePdfGeneratorStore = defineStore('pdfGenerator', {
   state: () => ({
@@ -45,18 +44,18 @@ export const usePdfGeneratorStore = defineStore('pdfGenerator', {
   actions: {
     async loadStoredConfig() {
       try {
-        const stored = await getExtensionStorage<typeof this.config>();
+        const stored = await celtra.getExtensionStorage<typeof this.config>();
         if (stored) this.config = { ...this.config, ...stored };
       } catch {}
     },
 
     async saveConfig() {
-      await setExtensionStorage(this.config);
+      await celtra.setExtensionStorage(this.config);
     },
 
     loadFromLaunchOptions() {
-      this.allOutputs = launchOptions.distribution?.outputs || [];
-      const designFile = launchOptions.distribution?.designFile?.name || 'document';
+      this.allOutputs = celtra.launchOptions.distribution?.outputs || [];
+      const designFile = celtra.launchOptions.distribution?.designFile?.name || 'document';
       this.designFileName = designFile.replace(/[^a-z0-9_\-]/gi, '_');
     },
 
