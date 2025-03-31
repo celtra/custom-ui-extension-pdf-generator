@@ -13,7 +13,7 @@ As long as a single url can be provided, on which the extension is hosted, any t
 ### Before you begin
 To work with this repository, you will need [node and npm installed](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
 
-[Fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo) this repository to change it and make it your own.
+[Fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo) this repository to change it and make it your own. Once you clone it, run `npm ci` for first package installation.
 
 [Create a Celtra API App](https://support.celtra.io/account/users/set-up-an-api-application) to use basic auth.
 
@@ -52,9 +52,9 @@ To work with this repository, you will need [node and npm installed](https://doc
 		You can also use Celtra to host your extension's `index.html` file. Encode the `index.html` file using `base64` and pass it in the `html` parameter. Example for adding an extension with a Celtra-hosted `index.html`:
 
 			# Base64 encode index.html.
-			html_content=$(cat /path/to/file | base64 -w 0)
+			html_content=$(cat dist/index.html | base64 -w 0)
 			# Or in some Mac shells
-			# html_content=$(cat /path/to/file | base64 -b 0)
+			# html_content=$(cat dist/index.html | base64 -b 0)
 
 			# Construct JSON payload with Base64-encoded HTML.
 			json_payload='{
@@ -211,6 +211,10 @@ Register a new custom format using a schema. See `FormatRegistrationOptions` typ
 	registerDistributionWorkflow(distributionWorkflowRegistrationId: string, distributionWorkflowRegistrationOptions: DistributionWorkflowRegistrationOptions): Promise<void>
 Register a distribution workflow. This allows the extension to be visible in export dialog and open inside an iframe. `DistributionWorkflowRegistrationOptions` can contain formats registered in other extensions in `supportedFormats`.
 
+#### registerEditorWorkflow
+	registerEditorWorkflow(editorWorkflowRegistrationId: string, editorWorkflowRegistrationOptions: EditorWorkflowRegistrationOptions): Promise<void>
+Register an editor workflow. This allows the extension to be visible in design and content tabs inside an iframe.
+
 #### registerOutputAttributes
 	registerOutputAttributes(outputAttributesRegistrationOptions: OutputAttributesRegistrationOptions): Promise<void>
 Register output attributes with possible values on platform. Output attributes can be used to filter outputs.
@@ -231,6 +235,10 @@ Fetch the data stored by `setExtensionStorage`.
 	getOutputContentHashes(): Promise<OutputContentHashes[]>
 Get a list of output id's with a hash representing the content of the output.
 
+#### setDragAndDrop
+	setDragAndDrop(event: DragEvent, payload: DragAndDropPayload[]): Promise<void>
+This action is expected to be used on `dragstart` event with no propagation. It will initiate dragging the payload into the design file editor and will create a drop when `mouseup` event is received.
+
 #### on
 	on(type: EventType, callback: VoidFunction): void
 Register a `callback` function that is called when event of `type` occurs. See  `EventType` for possible options. Multiple callbacks can be registered.
@@ -245,4 +253,4 @@ Removes the `callback` for event of `type`. `callback` must be the same (`===` c
 #### launchOptions
 
 	readonly launchOptions: LaunchOptions
-Launch options contain the setting the extension is ran in and information extensions in that setting usually use. The extensions are first ran in headless mode when the design file is opened and the extension receives `launchOptions.main`. When used in the export dialog (see `registerDistributionWorkflow`), the extension receives `launchOptions.distribution` .
+Launch options contain the setting the extension is ran in and information extensions in that setting usually use. The extensions are first ran in headless mode when the design file is opened and the extension receives `launchOptions.main`. When used in the export dialog (see `registerDistributionWorkflow`), the extension receives `launchOptions.distribution` . When used in the editor (see `registerEditorWorkflow`), the extension receives `launchOptions.editor` .

@@ -11,14 +11,14 @@
 </template>
 
 <script setup lang="ts">
-import LoadingPanel from './views/LoadingPanel.vue'
-import ErrorPanel from './views/ErrorPanel.vue'
-import InfoPanel from './views/InfoPanel.vue'
+import LoadingPanel from './distribution/LoadingPanel.vue'
+import ErrorPanel from './distribution/ErrorPanel.vue'
+import InfoPanel from './distribution/InfoPanel.vue'
 import { computed } from 'vue'
 import { useExportApiStore } from './stores/export-api'
 
 const exportApiStore = useExportApiStore()
-exportApiStore.export('custom-extension-template', 'generic')
+  exportApiStore.export('custom-extension-template', 'generic')
 
 const showLoadingPanel = computed(() => exportApiStore.inProgress)
 const exportFailedMessage = computed(() => exportApiStore.exportFailedMessage)
